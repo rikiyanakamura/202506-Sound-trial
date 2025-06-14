@@ -39,8 +39,12 @@ y_prob = model.predict_proba(X_test)[:, 1]
 # Display performance
 st.subheader("Model Evaluation")
 st.write(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
-st.write(f"AUC: {roc_auc_score(y_test, y_prob, multi_class='ovr'):.2f}")
-
+st.write(f"AUC: {roc_auc_score(y_test, y_prob):.2f}")
+from sklearn.preprocessing import LabelBinarizer
+if y_test.dtype == 'O':
+    lb = LabelBinarizer()
+    y_test = lb.fit_transform(y_test).ravel()
+    
 # ROC Curve
 fpr, tpr, _ = roc_curve(y_test, y_prob)
 fig, ax = plt.subplots()
