@@ -39,7 +39,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 # Display performance
 st.subheader("Model Evaluation")
 st.write(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
-st.write(f"AUC: {roc_auc_score(y_test, y_prob):.2f}")
+st.write(f"AUC: {roc_auc_score(y_test, y_prob, multi_class='ovr'):.2f}")
 
 # ROC Curve
 fpr, tpr, _ = roc_curve(y_test, y_prob)
